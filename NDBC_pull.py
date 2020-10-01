@@ -17,9 +17,14 @@ import datetime
 
 #Station 46088 (LLNR 16337) - NEW DUNGENESS - 17 NM NE of Port Angeles, WA
 # NOAA Environmental Lighted Buoy 46088
+# 48.332 N 123.179 W (48°19'56" N 123°10'44" W)
+# pulled start stop dates from looking at the buoy's historical data
+# https://www.ndbc.noaa.gov/station_history.php?station=46088
+
 start_date = datetime(2004,1,1)
 end_date = datetime(2019,12,31)
-station = Station(46088, start_date, end_date)
+swfpac_buoy = 46088
+station = Station(swfpac_buoy, start_date, end_date)
 station_46088_df = pd.DataFrame(data=station.wvht, index=station.time, columns=["wave_height_(ft)"])
 file_path = "data/SWFPAC_open_waters_buoy46088_sig_wave_height_2004_2019.csv"
 station_46088_df.to_csv(file_path)
@@ -30,7 +35,8 @@ station_46088_df.to_csv(file_path)
 # NOAA Environmental Lighted Buoy 46088
 start_date = datetime(2006,1,1)
 end_date = datetime(2019,12,31)
-station = Station(41112, start_date, end_date)
+swflant_buoy = 41112
+station = Station(swflant_buoy, start_date, end_date)
 station_46088_df = pd.DataFrame(data=station.wvht, index=station.time, columns=["wave_height_(ft)"])
 file_path = "data/SWFLANT_open_waters_buoy41112_sig_wave_height_2006_2019.csv"
 station_46088_df.to_csv(file_path)
