@@ -2,7 +2,7 @@
 # https://github.com/wavebitscientific/ndbc
 from ndbc import Station
 import pandas as pd
-import datetime
+from datetime import datetime
 
 # instance variables:
 # wspd = wind speed (knots)
@@ -20,7 +20,6 @@ import datetime
 # 48.332 N 123.179 W (48°19'56" N 123°10'44" W)
 # pulled start stop dates from looking at the buoy's historical data
 # https://www.ndbc.noaa.gov/station_history.php?station=46088
-
 start_date = datetime(2004,1,1)
 end_date = datetime(2019,12,31)
 swfpac_buoy = 46088
@@ -41,8 +40,14 @@ station_46088_df = pd.DataFrame(data=station.wvht, index=station.time, columns=[
 file_path = "data/SWFLANT_open_waters_buoy41112_sig_wave_height_2006_2019.csv"
 station_46088_df.to_csv(file_path)
 
-#Station PTAW1 - 9444090 - Port Angeles, WA
-#48.125 N 123.441 W (48°7'29" N 123°26'28" W)
 
+# GA buoy data pull, missing the data from 1988-1999 because of ndbc package error, there is an open issue on github
+start_date = datetime(2000,1,1)
+end_date = datetime(2019,12,31)
+swflant_buoy = 41008
+station = Station(swflant_buoy, start_date, end_date)
+station_df = pd.DataFrame(data=station.wvht, index=station.time, columns=["wave_height_(ft)"])
+file_path = "data/SWFLANT_open_waters_buoy{}_sig_wave_height.csv".format(swflant_buoy)
+station_df.to_csv(file_path)
 
 
